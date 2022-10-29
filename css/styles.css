@@ -1,0 +1,21 @@
+.mainTable{
+  width: 300px;
+  height: 300px;
+  margin-top: 10%;
+  margin-left: 10%;
+}
+.tableRow{
+}
+.tableCell{
+  width: 100px;
+  height: 100px;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+}
+.tableCell:hover{
+  background-color: red;
+}
+.cellImage{
+  cursor: pointer;
+}
