@@ -1,5 +1,5 @@
 .mainContainer{
-  margin-top: 10%;
+  margin-top: 20px;
   text-align: center;
 }
 button{
@@ -7,7 +7,7 @@ button{
   height: 50px;
   font-size: larger;
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 input{
   width: 100px;
