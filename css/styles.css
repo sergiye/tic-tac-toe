@@ -1,21 +1,44 @@
-.mainTable{
-  width: 300px;
-  height: 300px;
+.mainContainer{
   margin-top: 10%;
-  margin-left: 10%;
+  text-align: center;
 }
-.tableRow{
+button{
+  width: 100px;
+  height: 50px;
+  font-size: larger;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+input{
+  width: 100px;
+  height: 50px;
+  font-size: larger;
+  margin-top: 20px;
+}
+.mainTable{
+  border-spacing: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
 }
 .tableCell{
-  width: 100px;
-  height: 100px;
   border-style: solid;
   border-color: black;
-  border-width: 1px;
+  border-width: 3px;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
 }
-.tableCell:hover{
-  background-color: red;
+.tableCellEmpty:hover{
+  background-color: lightskyblue;
+}
+.tableCellFilled:hover{
+  background-color: lightcoral;
+}
+.tableCellWin{
+  background-color: gold;
 }
 .cellImage{
-  cursor: pointer;
+  width: 150px;
+  height: 150px;
 }

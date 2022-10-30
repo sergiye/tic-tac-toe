@@ -2,6 +2,15 @@ let size = 3;
 let cellValues;
 let krestiki = true;
 
+function setStatus(text){
+  document.getElementById('pStatus').innerText = text;
+}
+
+function markCellAsWinner(r, c){
+  let cell = document.getElementById('cell_' + r + '_' + c);
+  cell.className  = 'tableCell tableCellWin';
+}
+
 function isRowFilled(row, value){
   if (value === 0) return false;
   return cellValues[row].every((v, i, arr) => v === value);
@@ -9,11 +18,7 @@ function isRowFilled(row, value){
 
 function isColumnFilled(column, value){
   if (value === 0) return false;
-  for(let r = 0; r < size; r++){
-    if (cellValues[r][column] !== value)
-      return false;
-  }
-  return true;
+  return cellValues.every((v, i, arr) => v[column] === value);
 }
 
 function isDiagonalFilled(reverse){
@@ -33,18 +38,42 @@ function isDiagonalFilled(reverse){
 function checkGameFinished(){
   //check rows filled with currValue
   for(let r = 0; r < size; r++){
-    if (isRowFilled(r, cellValues[r][0]))
+    if (isRowFilled(r, cellValues[r][0])){
+      for (let c = 0; c < size; c++){
+        markCellAsWinner(r, c);
+      }
       return true;
+    }
   }
   //check columns filled with currValue
   for(let c = 0; c < size; c++){
-    if (isColumnFilled(c, cellValues[0][c]))
+    if (isColumnFilled(c, cellValues[0][c])){
+      for (let r = 0; r < size; r++){
+        markCellAsWinner(r, c);
+      }
       return true;
+    }
   }
   //check first diagonal filled
-  if (isDiagonalFilled(false)) return true;
+  if (isDiagonalFilled(false)) {
+    for (let i = 0; i < size; i++){
+      markCellAsWinner(i, i);
+    }
+    return true;
+  }
   //check second diagonal filled
-  if (isDiagonalFilled(true)) return true;
+  if (isDiagonalFilled(true)) {
+    for (let i = 0; i < size; i++){
+      markCellAsWinner(size - 1 - i, i);
+    }
+    return true;
+  }
+
+  //check no more moves available
+  if (cellValues.every((r, idx, _) => r.every((v, i, arr) => v !== 0))){
+    return true;
+  }
+
   return false;
 }
 
@@ -64,14 +93,18 @@ function cellClick(ev){
       ev.target.src = "img/nolik.png";
       cellValues[r][c] = 2;
     }
+
+    ev.target.parentNode.classList.remove("tableCellEmpty");
+    ev.target.parentNode.classList.add("tableCellFilled"); 
+
     krestiki = !krestiki;
+    setStatus((krestiki ? "X" : "O") + " - make your move...");
+
     console.dir(cellValues);
     //use timeout to allow browser to update image 
     setTimeout(function() {
       if (checkGameFinished()){
-        alert("Game is over!");
-        // window.location.reload();
-        initialize(size, size);
+        setStatus("Game is over!");
       }
     }, 100);
   }
@@ -89,11 +122,11 @@ function initialize(rows, cells){
     for(let r = 0; r < rows; r++) {
       cellValues[r] = new Array(cells);
       let row = document.createElement("tr");
-      row.className = "tableRow";
       mainTable.appendChild(row);
       for(let c = 0; c < cells; c++) {
         let cell = document.createElement("td");
-        cell.className = "tableCell";
+        cell.id = "cell_" + r + "_" + c;
+        cell.className = "tableCell tableCellEmpty";
         row.appendChild(cell);
         let img = document.createElement("img");
         img.className = "cellImage";
@@ -106,6 +139,7 @@ function initialize(rows, cells){
     }
   }
   console.log('initialized');
+  setStatus((krestiki ? "X" : "O") + " - make your move...");
 }
 
 initialize(size, size);

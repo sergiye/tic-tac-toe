@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Krestiki-Noliki</title>
+	<title>Tic-Tac-Toe</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-	<table class="mainTable" id="mainTable">
-	</table>
+	<div class="mainContainer">
+		<h2>Tic-Tac-Toe</h2>
+		<!-- <input type="number" id="sizeValue" name="sizeValue" min="3" max="10"> -->
+		<table class="mainTable" id="mainTable">
+		</table>
+		<button title="Restart" onclick="initialize(size, size);">Restart</button>
+		<p id="pStatus">Make your move...</p>
+	</div>
 
 	<script src="js/index.js"></script>
 </body>
